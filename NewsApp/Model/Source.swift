@@ -1,18 +1,18 @@
 //
-//  NewModel.swift
+//  Source.swift
 //  NewsApp
 //
-//  Created by Narkoz on 16.08.2022.
+//  Created by Narkoz on 17.08.2022.
 //
+
 import UIKit
 
-struct NewModel {
+struct Source : Codable{
     
     // MARK: - Properties
-    var title : String?
-  //  var description : String?
-  //  var urlToImage : String?
-  //  var content : String?
+    
+    var name : String?
+    var id : String?
     
     // MARK: - Initialierz
     

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="HomeCell" rowHeight="83" id="KGk-i7-Jjw" customClass="HomeTableViewCell" customModule="NewsApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="83"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="83"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RWk-hr-q2J">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="83"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sht-rR-wNK">
+                                <rect key="frame" x="237" y="5" width="75" height="73"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="sht-rR-wNK" secondAttribute="height" multiplier="75:73" id="ZLS-hY-4HW"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P4q-2d-qIG">
+                                <rect key="frame" x="14" y="5" width="210" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tNq-Uc-29K">
+                                <rect key="frame" x="14" y="31" width="210" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="P4q-2d-qIG" firstAttribute="leading" secondItem="RWk-hr-q2J" secondAttribute="leading" constant="14" id="134-wc-xwx"/>
+                            <constraint firstItem="sht-rR-wNK" firstAttribute="top" secondItem="RWk-hr-q2J" secondAttribute="top" constant="5" id="1pp-9N-t90"/>
+                            <constraint firstAttribute="trailing" secondItem="sht-rR-wNK" secondAttribute="trailing" constant="8" id="2yB-ak-jv5"/>
+                            <constraint firstAttribute="bottom" secondItem="sht-rR-wNK" secondAttribute="bottom" constant="5" id="SCY-lZ-m2s"/>
+                            <constraint firstItem="sht-rR-wNK" firstAttribute="leading" secondItem="P4q-2d-qIG" secondAttribute="trailing" constant="13" id="Xtg-0r-sbj"/>
+                            <constraint firstItem="P4q-2d-qIG" firstAttribute="top" secondItem="RWk-hr-q2J" secondAttribute="top" constant="5" id="cxN-vY-oov"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="RWk-hr-q2J" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="HU8-10-laf"/>
+                    <constraint firstItem="RWk-hr-q2J" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Ocp-tF-Duf"/>
+                    <constraint firstAttribute="trailing" secondItem="RWk-hr-q2J" secondAttribute="trailing" id="UxA-Fp-AWe"/>
+                    <constraint firstAttribute="bottom" secondItem="RWk-hr-q2J" secondAttribute="bottom" id="Y2A-gE-Ak4"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="descriptionLabel" destination="tNq-Uc-29K" id="J2O-ci-vqA"/>
+                <outlet property="imageViewCell" destination="sht-rR-wNK" id="U1m-NM-qkh"/>
+                <outlet property="titleLabel" destination="P4q-2d-qIG" id="4dD-OU-KCr"/>
+            </connections>
+            <point key="canvasLocation" x="131.8840579710145" y="143.63839285714286"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
