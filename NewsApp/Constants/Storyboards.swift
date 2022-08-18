@@ -13,6 +13,7 @@ enum Storyboard : Int {
     case home
     case favorite
     case splash
+    case detail
     
     var name : String {
         switch self{
@@ -22,6 +23,8 @@ enum Storyboard : Int {
             return "Favorite"
         case.splash:
             return "Splash"
+        case.detail:
+            return "Detail"
         }
     }
     var storyboard : UIStoryboard {

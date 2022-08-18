@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0707F37528AE3F23000A16D1 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0707F37428AE3F23000A16D1 /* DetailViewController.swift */; };
+		0707F37728AE3F32000A16D1 /* DetailScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0707F37628AE3F32000A16D1 /* DetailScreen.storyboard */; };
 		077ABED028AD65E100B0ECE0 /* NewsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077ABECF28AD65E100B0ECE0 /* NewsViewModel.swift */; };
 		077ABED328AD671E00B0ECE0 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077ABED128AD671E00B0ECE0 /* HomeTableViewCell.swift */; };
 		077ABED428AD671E00B0ECE0 /* HomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 077ABED228AD671E00B0ECE0 /* HomeTableViewCell.xib */; };
@@ -33,6 +35,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0707F37428AE3F23000A16D1 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		0707F37628AE3F32000A16D1 /* DetailScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DetailScreen.storyboard; sourceTree = "<group>"; };
 		077ABECF28AD65E100B0ECE0 /* NewsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewModel.swift; sourceTree = "<group>"; };
 		077ABED128AD671E00B0ECE0 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		077ABED228AD671E00B0ECE0 /* HomeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeTableViewCell.xib; sourceTree = "<group>"; };
@@ -74,6 +78,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0707F37328AE3F12000A16D1 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				0707F37428AE3F23000A16D1 /* DetailViewController.swift */,
+				0707F37628AE3F32000A16D1 /* DetailScreen.storyboard */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
 		079A832528AC27CF009DB712 = {
 			isa = PBXGroup;
 			children = (
@@ -210,6 +223,7 @@
 		07F6CDF028ACD71B007CDEE5 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				0707F37328AE3F12000A16D1 /* Detail */,
 				079A835B28AC31F0009DB712 /* Home */,
 				079A836228AC33E3009DB712 /* Favorite */,
 				079A834C28AC2A17009DB712 /* Splash */,
@@ -305,6 +319,7 @@
 			files = (
 				079A833E28AC27D2009DB712 /* LaunchScreen.storyboard in Resources */,
 				079A835F28AC320F009DB712 /* HomeScreen.storyboard in Resources */,
+				0707F37728AE3F32000A16D1 /* DetailScreen.storyboard in Resources */,
 				079A835028AC2A48009DB712 /* SplashScreen.storyboard in Resources */,
 				079A836128AC33D9009DB712 /* FavoriteScreen.storyboard in Resources */,
 				077ABED428AD671E00B0ECE0 /* HomeTableViewCell.xib in Resources */,
@@ -362,6 +377,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				079A834E28AC2A2F009DB712 /* SplashViewController.swift in Sources */,
+				0707F37528AE3F23000A16D1 /* DetailViewController.swift in Sources */,
 				079A835428AC2B0E009DB712 /* Storyboards.swift in Sources */,
 				079A836928AC3C4B009DB712 /* WebServices.swift in Sources */,
 				079A835228AC2A75009DB712 /* BaseViewController.swift in Sources */,

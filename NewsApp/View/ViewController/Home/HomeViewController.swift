@@ -76,11 +76,22 @@ extension HomeViewController : UITableViewDataSource , UITableViewDelegate{
         let url = URL(string:newsViewModel.newsList[indexPath.row].urlToImage ?? "")
         let data = try? Data(contentsOf: url!)
         cell.imageView?.image = UIImage(data: data!)
+        // burası guard let ile düzenlenecek
+        
+        
+        
         
 //       let cell = tableView.dequeueReusableCell(withIdentifier: Constants.cell.homeCell, for: indexPath) as! HomeTableViewCell
         
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let newsModel = newsViewModel.newsList[indexPath.row]
+        guard let viewController = self.getViewController(fromStoryboard: .detail, type: DetailViewController.self) else {return}
+        viewController.newsModel = newsModel
+        self.navigationController?.show(viewController, sender: nil)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
