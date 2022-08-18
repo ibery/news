@@ -26,9 +26,12 @@ class NewsViewModel {
     
     
     //MARK: - Methods
+
     
-    func downloadNews(tableView : UITableView){
-        let url = URL(string: Constants.url)!
+    func downloadNews(tableView : UITableView , page : Int , searchWord : String){
+      //  let url = URL(string: Constants.url)!
+        let url = URL(string:Constants.baseUrl+searchWord+Constants.pageUrl+String(page)+Constants.apiKeyUrl+Constants.apiKey)!
+ 
         WebServices().downloadMovieData(url: url) { newsList in
             if let newsList = newsList {
 

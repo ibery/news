@@ -16,6 +16,7 @@ class HomeViewController : BaseViewController  {
     @IBOutlet var tableView: UITableView!
     
     private var newsViewModel = NewsViewModel ()
+    private var page = 1
     
     // MARK: - Life cycle
     override func viewDidLoad() {
@@ -24,7 +25,9 @@ class HomeViewController : BaseViewController  {
         tableView.dataSource = self
         self.tableView.register(UINib(nibName: "HomeTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.cell.homeCell)
         
-        newsViewModel.downloadNews(tableView: tableView)
+   //     newsViewModel.downloadNews(tableView: tableView , page: page,searchWord : searchTextField.text ?? "")
+        
+        newsViewModel.downloadNews(tableView: tableView , page: page,searchWord : "besiktas")
         
  
     }
@@ -44,7 +47,10 @@ class HomeViewController : BaseViewController  {
     
     //MARK: - Methods
     
-    
+    func nextPage(){
+        page += 1
+        newsViewModel.downloadNews(tableView: tableView , page: page,searchWord : "besiktas")
+    }
 
 
 
@@ -62,7 +68,7 @@ extension HomeViewController : UITableViewDataSource , UITableViewDelegate{
         
        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.cell.homeCell, for: indexPath) as? HomeTableViewCell else {fatalError()}
         
-        newsViewModel.downloadNews(tableView: self.tableView)
+       
         
         cell.titleLabel.text = newsViewModel.newsList[indexPath.row].title
         cell.descriptionLabel.text = newsViewModel.newsList[indexPath.row].description
@@ -82,7 +88,15 @@ extension HomeViewController : UITableViewDataSource , UITableViewDelegate{
         return rowHeight
         //tableView.frame.height/5
     }
-    
+
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let intTotalRow = tableView.numberOfRows(inSection: indexPath.section)
+        if indexPath.row == intTotalRow-1{
+            if intTotalRow % 4 == 0{
+                nextPage()
+            }
+        }
+    }
     
 }
 
