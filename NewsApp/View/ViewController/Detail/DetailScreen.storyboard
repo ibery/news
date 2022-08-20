@@ -43,6 +43,9 @@
                                 <buttonConfiguration key="configuration" style="plain" title="News Source">
                                     <fontDescription key="titleFontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="21"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="NewsSourceButtonClick:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="8R6-8c-0N5"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>

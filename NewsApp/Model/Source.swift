@@ -2,31 +2,11 @@
 //  Source.swift
 //  NewsApp
 //
-//  Created by Narkoz on 17.08.2022.
+//  Created by Narkoz on 19.08.2022.
 //
 
-import UIKit
-
-struct Source : Codable{
-    
-    // MARK: - Properties
-    
-    var name : String?
-    var id : String?
-    
-    // MARK: - Initialierz
-    
-    
-    
-    // MARK: - Setup
-    
-    
-    // MARK: - Actions
-    
-    
-    
-    //MARK: - Methods
-    
-    
-    
+// MARK: - Source
+struct Source: Codable {
+    let id: String?
+    let name: String
 }

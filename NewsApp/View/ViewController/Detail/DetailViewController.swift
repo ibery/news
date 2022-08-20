@@ -12,13 +12,13 @@ class DetailViewController : BaseViewController  {
     
     
     // MARK: - Properties
-    var newsModel = NewsModel()
+    var newsModel = Article()
     
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         print("burası detail viewcontroller")
-        print(newsModel.title)
+     //   print(newsModel.title)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -26,12 +26,16 @@ class DetailViewController : BaseViewController  {
         self.navigationController?.navigationBar.isHidden = false
     }
     
-    
+   
     
     // MARK: - Setup
     
     
     // MARK: - Actions
+    @IBAction func NewsSourceButtonClick(_ sender: UIButton) {
+        guard let viewController = Storyboard.source.viewController else {return}
+        self.navigationController?.show(viewController, sender: nil)
+    }
     
     
     //MARK: - Methods

@@ -10,9 +10,9 @@ import UIKit
 class NewsViewModel {
     
     // MARK: - Properties
-    var newsList = [NewsModel]()
+    var newsList = [Article]()
     //var source : NewsModel?
-     var news: [Any] = []
+  //   var news: [Any] = []
     
     // MARK: - Initialierz
     
@@ -26,30 +26,40 @@ class NewsViewModel {
     
     
     //MARK: - Methods
+    
+
 
     
-    func downloadNews(tableView : UITableView , page : Int , searchWord : String){
-      //  let url = URL(string: Constants.url)!
-        let url = URL(string:Constants.baseUrl+searchWord+Constants.pageUrl+String(page)+Constants.apiKeyUrl+Constants.apiKey)!
- 
-        WebServices().downloadMovieData(url: url) { newsList in
-            if let newsList = newsList {
-
-                
-                self.newsList.append(contentsOf: newsList)
-                for n in newsList{
-                    print(n.title)
+    func downloadNews( url: URL ,page : Int , searchWord : String){
+   
+            WebServices().downloadNewsData(url: url) { newsList in
+                if let newsList = newsList {
+                    self.newsList.append(contentsOf: newsList)
+                    for i in newsList{
+                        print(i.title)
+                    }
+                }
+                DispatchQueue.main.async {
+                   
                 }
             }
-            DispatchQueue.main.async {
-                tableView.reloadData()
-            }
-
-        }
         
-
-        
+  
     }
+    
+//    func downloadNews(  page : Int , searchWord : String) -> [Article]{
+//        let url = URL(string:Constants.url)!
+//        WebServices().downloadNewsData(url: url) { newsList in
+//            if let newsList = newsList {
+//                self.newsList.append(contentsOf: newsList)
+//       
+//            }
+//            DispatchQueue.main.async {
+//               
+//            }
+//        }
+//        return newsList
+//    }
     
     
 }

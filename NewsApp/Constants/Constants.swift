@@ -8,18 +8,14 @@
 import Foundation
 
 struct Constants {
-    //static let url = "https://newsapi.org/v2/everything?q=besiktas&page=1&apiKey=90f78b5e459f4557a6d285161db89387"
-    static let baseUrl = "https://newsapi.org/v2/everything?q="
-   // static var searchWord = String ()
-    static var searchWord = "besiktas"
+ //   static let url = "https://newsapi.org/v2/everything?q=besiktas&page=1&apiKey=90f78b5e459f4557a6d285161db89387&pageSize=20"
+    static let baseUrl = "https://newsapi.org/v2"
+    static let searchUrl = "/everything?q="
     static let pageUrl = "&page="
-    static var pageCount = Int()
-    static let apiKeyUrl = "&apiKey="
-    static let apiKey = "90f78b5e459f4557a6d285161db89387"
-    
-    static let url = baseUrl+searchWord+pageUrl+String(pageCount)+apiKeyUrl+apiKey
-    
-    
+    static let apiKeyUrl = "&apiKey=afdd6ffbe7af4785b519599df26fb67a"
+    static let pageSize = "&pageSize=20"
+    static let country = "/top-headlines?country=tr"
+
     struct cell {
         static let homeCell = "HomeCell"
     }
