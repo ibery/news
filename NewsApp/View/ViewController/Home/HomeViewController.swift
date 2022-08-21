@@ -8,7 +8,7 @@
 import UIKit
 import Alamofire
 
-class HomeViewController : BaseViewController , NewsViewModelDelegate  {
+class HomeViewController : BaseViewController {
 
  
     
@@ -22,8 +22,10 @@ class HomeViewController : BaseViewController , NewsViewModelDelegate  {
     
     private var newsViewModel = NewsViewModel ()
     private var newsArray = [Article]()
+    private var searchNewsArray = [Article]()
     private var page = 1
     private var requestStatus = false
+    private var searchText : String = ""
    
     
     // MARK: - Life cycle
@@ -35,7 +37,7 @@ class HomeViewController : BaseViewController , NewsViewModelDelegate  {
         tableView.dataSource = self
         self.tableView.register(UINib(nibName: "HomeTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.cell.homeCell)
         addRecognizer()
-        newsViewModel.downloadNews( searchWord: searchTextField.text ?? "")
+        fetchHomeNews ()
         
         
         
@@ -61,25 +63,51 @@ class HomeViewController : BaseViewController , NewsViewModelDelegate  {
     
     @objc func imageClick (){
         print("image click")
-       
+        fetchSearchNews()
     }
     
     //MARK: - Methods
     
     func nextPage(){
-        Constants.pageCount += 1
-        print(Constants.pageCount)
-        newsViewModel.downloadNews(searchWord: self.searchTextField.text ?? "")
-   
+        if requestStatus{
+            Constants.pageCount += 1
+            fetchSearchNews()
+        }else{
+            Constants.pageCount += 1
+            fetchHomeNews ()
+        }
+        
     }
     
-    func newsDataFetch(dataArray: [Article]) {
-            self.newsArray = dataArray
+//    func newsDataFetch(dataArray: [Article]) {
+//            self.newsArray = dataArray
+//
+//            DispatchQueue.main.async {
+//                self.tableView.reloadData()
+//            }
+//        }
     
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
+    func fetchHomeNews (){
+        
+       let url = Constants.baseUrl+Constants.country+Constants.apiKeyUrl+Constants.pageUrl+String(Constants.pageCount)+Constants.pageSize
+        newsViewModel.downloadNews( url :  url , searchWord: "")
+
+    }
+    
+    func fetchSearchNews(){
+        if let searchText =  self.searchTextField.text{
+          var  url = Constants.baseUrl+Constants.searchUrl+searchText+Constants.pageUrl+String(Constants.pageCount)+Constants.apiKeyUrl+Constants.pageSize
+            newsViewModel.downloadNews(url: url , searchWord: "")
+            self.tableView.reloadData()
+        }else{
+            // alert action  - aradığınız haber bulunamadı
         }
+
+       
+        
+        
+        requestStatus = true
+    }
 
 }
 
@@ -131,18 +159,21 @@ extension HomeViewController : UITableViewDataSource , UITableViewDelegate{
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let intTotalRow = tableView.numberOfRows(inSection: indexPath.section)
         if indexPath.row == intTotalRow-1{
+            if intTotalRow % 20 == 0{
                 nextPage()
+            }
+                
         }
     }
     
 }
 
-//extension HomeViewController : NewsViewModelDelegate {
-//    func newsDataFetch(dataArray: [Article]) {
-//        self.newsArray = dataArray
-//
-//        DispatchQueue.main.async {
-//            self.tableView.reloadData()
-//        }
-//    }
-//}
+extension HomeViewController : NewsViewModelDelegate {
+    func newsDataFetch(dataArray: [Article]) {
+        self.newsArray = dataArray
+
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+}

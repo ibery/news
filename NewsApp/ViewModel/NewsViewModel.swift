@@ -31,12 +31,15 @@ class NewsViewModel {
     
     //MARK: - Methods
     
-    func downloadNews( searchWord : String?){
+    func downloadNews( url : String , searchWord : String?){
         print("page count \(Constants.pageCount)")
         
-        guard let url = URL(string: Constants.baseUrl+Constants.country+Constants.apiKeyUrl+Constants.pageUrl+String(Constants.pageCount)+Constants.pageSize) else {return}
+
         
-  //     guard let url = URL(string: Constants.baseUrl+Constants.searchUrl+Constants.pageUrl+String(Constants.pageCount)+Constants.apiKeyUrl+Constants.pageSize) else {return}
+       guard let url = URL(string: url ) else {return}
+        
+        guard let url = URL(string: "https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=afdd6ffbe7af4785b519599df26fb67a\(Constants.pageUrl)\(Constants.pageCount)") else {return}
+        
         print("url : \(url)")
         
         WebServices().downloadNewsData(url: url) { newsList in
@@ -67,3 +70,6 @@ class NewsViewModel {
 }
 
 
+//Constants.baseUrl+Constants.searchUrl+Constants.pageUrl+String(Constants.pageCount)+Constants.apiKeyUrl+Constants.pageSize
+
+//     guard let url = URL(string: Constants.baseUrl+Constants.country+Constants.apiKeyUrl+Constants.pageUrl+String(Constants.pageCount)+Constants.pageSize) else {return}
