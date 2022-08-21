@@ -7,15 +7,20 @@
 import Foundation
 import UIKit
 
+protocol NewsViewModelDelegate{
+    func newsDataFetch(dataArray: [Article])
+}
+
 class NewsViewModel {
     
     // MARK: - Properties
-    var newsList = [Article]()
+    var dataArray = [Article]()
     //var source : NewsModel?
-  //   var news: [Any] = []
+
+    var delegate : NewsViewModelDelegate?
+    
     
     // MARK: - Initialierz
-    
     
     
     // MARK: - Setup
@@ -24,42 +29,41 @@ class NewsViewModel {
     // MARK: - Actions
     
     
-    
     //MARK: - Methods
     
-
-
-    
-    func downloadNews( url: URL ,page : Int , searchWord : String){
-   
-            WebServices().downloadNewsData(url: url) { newsList in
+    func downloadNews( searchWord : String?){
+        print("page count \(Constants.pageCount)")
+        
+        guard let url = URL(string: Constants.baseUrl+Constants.country+Constants.apiKeyUrl+Constants.pageUrl+String(Constants.pageCount)+Constants.pageSize) else {return}
+        
+  //     guard let url = URL(string: Constants.baseUrl+Constants.searchUrl+Constants.pageUrl+String(Constants.pageCount)+Constants.apiKeyUrl+Constants.pageSize) else {return}
+        print("url : \(url)")
+        
+        WebServices().downloadNewsData(url: url) { newsList in
                 if let newsList = newsList {
-                    self.newsList.append(contentsOf: newsList)
+                    self.dataArray.append(contentsOf: newsList)
+       //             print("viewmodel")
                     for i in newsList{
-                        print(i.title)
+         //               print(i.title)
                     }
                 }
-                DispatchQueue.main.async {
-                   
-                }
+                    self.delegate?.newsDataFetch(dataArray: self.dataArray)
             }
-        
-  
     }
     
-//    func downloadNews(  page : Int , searchWord : String) -> [Article]{
-//        let url = URL(string:Constants.url)!
-//        WebServices().downloadNewsData(url: url) { newsList in
-//            if let newsList = newsList {
-//                self.newsList.append(contentsOf: newsList)
-//       
-//            }
-//            DispatchQueue.main.async {
-//               
-//            }
-//        }
-//        return newsList
-//    }
+    func downloadNewsHome(){
+        guard let url = URL(string: Constants.baseUrl+Constants.country+Constants.apiKeyUrl+Constants.pageUrl+String(Constants.pageCount)+Constants.pageSize) else {return}
+        
+        WebServices().downloadNewsData(url: url){ newList in
+            if let newList = newList {
+                self.dataArray.append(contentsOf: newList)
+            }
+            
+        }
+    }
     
+
     
 }
+
+
