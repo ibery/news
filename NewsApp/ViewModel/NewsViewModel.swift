@@ -9,15 +9,22 @@ import UIKit
 
 protocol NewsViewModelDelegate{
     func newsDataFetch(dataArray: [Article])
+    func newsDataSearchFetch(dataSearchArray : [Article])
 }
+
+//protocol NewsViewModelSearchDelegate{
+//    func newsDataSearchFetch(dataSearchArray : [Article])
+//}
 
 class NewsViewModel {
     
     // MARK: - Properties
     var dataArray = [Article]()
+    var dataSearchArray = [Article]()
     //var source : NewsModel?
 
     var delegate : NewsViewModelDelegate?
+ //   var delegateSearch : NewsViewModelSearchDelegate?
     
     
     // MARK: - Initialierz
@@ -31,16 +38,10 @@ class NewsViewModel {
     
     //MARK: - Methods
     
-    func downloadNews( url : String , searchWord : String?){
+    func downloadNews( url : String){
         print("page count \(Constants.pageCount)")
-        
-
-        
+  
        guard let url = URL(string: url ) else {return}
-        
-      //  guard let url = URL(string: "https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=afdd6ffbe7af4785b519599df26fb67a\(Constants.pageUrl)\(Constants.pageCount)") else {return}
-        
-        print("url : \(url)")
         
         WebServices().downloadNewsData(url: url) { newsList in
                 if let newsList = newsList {
@@ -49,6 +50,19 @@ class NewsViewModel {
                 }
                     self.delegate?.newsDataFetch(dataArray: self.dataArray)
             }
+    }
+    
+    func downloadSearchNews ( url : String , searchWord : String){
+        guard let url = URL(string: url) else {return }
+        
+        WebServices().downloadNewsData(url: url){ newsList in
+            if let newsList = newsList {
+                self.dataSearchArray.append(contentsOf: newsList)
+                print("search fonksiyonu \(self.dataSearchArray)")
+            }
+            self.delegate?.newsDataSearchFetch(dataSearchArray: self.dataSearchArray)
+            
+        }
     }
     
 //    func downloadNewsHome(){

@@ -106,9 +106,29 @@ class DetailViewController : BaseViewController  {
     
     @objc func shareClick (){
         print("share image click")
+        var url = String()
+        if pageControl{
+            url = self.newsModel?.url ?? ""
+        }else{
+            url = self.realmNewsModel.url
+        }
+        let shareSheetVC = UIActivityViewController(
+            activityItems :[
+            url
+            ],
+            applicationActivities: nil
+        )
+        present(shareSheetVC, animated: true)
+        
         
     }
     @objc func favoriteClick(){
+        if pageControl{
+            favoriteImage.image = UIImage(systemName:  "heart.fill")
+        }else{
+            favoriteImage.image = UIImage(systemName: "heart")
+             // realm database den kaldır 
+        }
         matchRealmToArticle()
         realmNewsViewModel.addFavorite(realmNewsModel: realmNewsModel)
     }
@@ -125,6 +145,10 @@ class DetailViewController : BaseViewController  {
         if let content = newsModel?.content{realmNewsModel.content = content}
         if let url = newsModel?.url{realmNewsModel.url = url}
         
+    }
+    
+    private func sheareSheet(){
+ 
     }
 }
 
