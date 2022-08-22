@@ -27,7 +27,7 @@ enum Storyboard : Int {
         case.detail:
             return "Detail"
         case.source:
-            return "Source"
+            return "NewsSource"
         }
     }
     var storyboard : UIStoryboard {

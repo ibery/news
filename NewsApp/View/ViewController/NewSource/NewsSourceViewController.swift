@@ -12,25 +12,31 @@ class NewsSourceViewController : BaseViewController  {
     
     // MARK: - Properties
     @IBOutlet var webView: UIWebView!
-    @IBOutlet var newsSourceLabel: UILabel!
+    var newsUrl = String()
     
     
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        webViwUrl()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.title = "News Source"
-        
+        self.navigationItem.title = "News Source"
     }
     
     
     
     // MARK: - Setup
-    
+    func webViwUrl() {
+
+        guard let url = URL(string: newsUrl) else {return}
+        let request = URLRequest(url : url)
+        webView.loadRequest(request)
+        
+    }
     
     // MARK: - Actions
     

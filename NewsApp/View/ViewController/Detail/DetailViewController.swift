@@ -40,7 +40,7 @@ class DetailViewController : BaseViewController  {
         self.navigationController?.navigationBar.isHidden = false
     }
     
-   
+    
     
     // MARK: - Setup
     func addRecognizer (){
@@ -69,7 +69,7 @@ class DetailViewController : BaseViewController  {
                 detailImage.image = UIImage(named:Images.notFound.imageName)
             }
         }else{
-            descriptionLabel.text = realmNewsModel.description
+            descriptionLabel.text = realmNewsModel.articleDescription
             calendarLabel.text = realmNewsModel.publishedAt
             authorLabel.text = realmNewsModel.author
             contentLabel.text = realmNewsModel.content
@@ -84,13 +84,23 @@ class DetailViewController : BaseViewController  {
             }
             
         }
-
+        
     }
     
     
     // MARK: - Actions
+    
     @IBAction func NewsSourceButtonClick(_ sender: UIButton) {
-        guard let viewController = Storyboard.source.viewController else {return}
+        
+        guard let viewController = self.getViewController(fromStoryboard: .source, type: NewsSourceViewController.self) else {return}
+        
+        if pageControl{
+            guard let url = newsModel?.url else {return}
+            viewController.newsUrl = url
+        }else{
+            viewController.newsUrl = realmNewsModel.url
+        }
+      
         self.navigationController?.show(viewController, sender: nil)
     }
     
@@ -99,11 +109,8 @@ class DetailViewController : BaseViewController  {
         
     }
     @objc func favoriteClick(){
-        
-        print("favorite image click")
         matchRealmToArticle()
         realmNewsViewModel.addFavorite(realmNewsModel: realmNewsModel)
-        
     }
     
     
