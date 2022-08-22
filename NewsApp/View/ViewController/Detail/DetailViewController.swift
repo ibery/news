@@ -7,7 +7,7 @@
 
 
 import UIKit
-
+import RealmSwift
 class DetailViewController : BaseViewController  {
     
     
@@ -20,27 +20,17 @@ class DetailViewController : BaseViewController  {
     @IBOutlet var calendarLabel: UILabel!
     @IBOutlet var authorLabel: UILabel!
     @IBOutlet var detailImage: UIImageView!
+    @IBOutlet var contentLabel: UILabel!
     
     var newsModel = Article()
-    private var realmNewsModel = RealmNewsModel()
+    var realmNewsModel = RealmNewsModel()
     private var realmNewsViewModel = RealmNewsViewModel()
+    var pageControl = Bool ()
     
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        descriptionLabel.text = newsModel?.articleDescription
-        calendarLabel.text = newsModel?.publishedAt
-        authorLabel.text = newsModel?.author
-        
-        let url = URL(string:newsModel!.urlToImage)
-        if let url = url {
-            if let data = try? Data(contentsOf: url){
-                detailImage.image = UIImage(data: data)
-            }
-        }else{
-            detailImage.image = UIImage(named:Images.notFound.imageName)
-        }
-
+        setupScreen()
         addRecognizer()
 
     }
@@ -61,6 +51,40 @@ class DetailViewController : BaseViewController  {
         favoriteImage.isUserInteractionEnabled = true
         let favoriteRecognizer = UITapGestureRecognizer(target: self, action: #selector(favoriteClick))
         favoriteImage.addGestureRecognizer(favoriteRecognizer)
+    }
+    
+    func setupScreen (){
+        if pageControl{
+            descriptionLabel.text = newsModel?.articleDescription
+            calendarLabel.text = newsModel?.publishedAt
+            authorLabel.text = newsModel?.author
+            contentLabel.text = newsModel?.content
+            
+            let url = URL(string:newsModel!.urlToImage)
+            if let url = url {
+                if let data = try? Data(contentsOf: url){
+                    detailImage.image = UIImage(data: data)
+                }
+            }else{
+                detailImage.image = UIImage(named:Images.notFound.imageName)
+            }
+        }else{
+            descriptionLabel.text = realmNewsModel.description
+            calendarLabel.text = realmNewsModel.publishedAt
+            authorLabel.text = realmNewsModel.author
+            contentLabel.text = realmNewsModel.content
+            
+            let url = URL(string:realmNewsModel.urlToImage)
+            if let url = url {
+                if let data = try? Data(contentsOf: url){
+                    detailImage.image = UIImage(data: data)
+                }
+            }else{
+                detailImage.image = UIImage(named:Images.notFound.imageName)
+            }
+            
+        }
+
     }
     
     

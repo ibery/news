@@ -61,6 +61,13 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qR0-jV-yOM">
+                                        <rect key="frame" x="17" y="519" width="381" height="280"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <viewLayoutGuide key="contentLayoutGuide" id="sJ4-7k-iOL"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="xZz-hl-1Rt"/>
@@ -85,6 +92,7 @@
                         <outlet property="authorLabel" destination="ezS-f3-4tc" id="Jmh-CE-oVC"/>
                         <outlet property="calendarImage" destination="T3T-0X-h8R" id="sQZ-In-G28"/>
                         <outlet property="calendarLabel" destination="yzO-B0-2Wy" id="R5L-bh-Bhm"/>
+                        <outlet property="contentLabel" destination="qR0-jV-yOM" id="0oN-EF-Pda"/>
                         <outlet property="descriptionLabel" destination="Vfu-dZ-NMG" id="sAN-DM-VRR"/>
                         <outlet property="detailImage" destination="tqp-Qk-UIe" id="Ov9-VO-qhY"/>
                         <outlet property="favoriteImage" destination="uxF-Kf-Itk" id="0p8-ra-PuN"/>

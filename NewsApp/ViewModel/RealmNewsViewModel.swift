@@ -40,8 +40,9 @@ class RealmNewsViewModel {
         }
     }
     
-    func getFavorite(){
+    func getFavorite() -> Results<RealmNewsModel>? {
         let realmNewsModel = realm.objects(RealmNewsModel.self)
+       return realmNewsModel
     }
     
     

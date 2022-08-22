@@ -129,7 +129,7 @@ extension HomeViewController : UITableViewDataSource , UITableViewDelegate{
         if let data = try? Data(contentsOf: url!){
             cell.imageView?.image = UIImage(data: data)
         }else{
-            cell.imageView?.image = UIImage(named: "favorite")
+            cell.imageView?.image = UIImage(named: Images.notFound.imageName)
         }
         
         
@@ -143,6 +143,7 @@ extension HomeViewController : UITableViewDataSource , UITableViewDelegate{
         guard let viewController = self.getViewController(fromStoryboard: .detail, type: DetailViewController.self) else {return}
         
         viewController.newsModel = newsModel
+        viewController.pageControl = true
         self.navigationController?.show(viewController, sender: nil)
     }
     

@@ -7,6 +7,7 @@ target 'NewsApp' do
 
 pod 'Alamofire'
 pod 'SwiftyJSON'
+pod 'RealmSwift', '~>10'
 
 
 end

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class  FavoriteViewController : BaseViewController  {
     
@@ -14,12 +15,17 @@ class  FavoriteViewController : BaseViewController  {
     
     @IBOutlet var tableView: UITableView!
     
+    private var realmModel : Results<RealmNewsModel>?
+    private var realmNewsViewModel = RealmNewsViewModel()
+    
+    
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
         self.tableView.register(UINib(nibName: Constants.tableviewController.homeTableView, bundle: nil), forCellReuseIdentifier: Constants.cell.homeCell)
+        realmModel = realmNewsViewModel.getFavorite()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -41,17 +47,48 @@ class  FavoriteViewController : BaseViewController  {
 
 extension FavoriteViewController : UITableViewDataSource , UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        
+        return realmModel?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.cell.homeCell) as? HomeTableViewCell else {fatalError()}
         
+        if let realmModel = realmModel{
+            cell.titleLabel.text = realmModel[indexPath.row].title
+            cell.descriptionLabel.text = realmModel[indexPath.row].description
+            let url = URL(string: realmModel[indexPath.row].urlToImage)
+            
+            if let data = try? Data(contentsOf: url!){
+                cell.imageView?.image = UIImage(data: data)
+            }else{
+                cell.imageView?.image = UIImage(named: Images.notFound.imageName)
+            }
+        }
+        return  cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let rowHeight: CGFloat = 140.0
+        return rowHeight
+        //tableView.frame.height/5
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        
-        
-        return  UITableViewCell()
+        if let realmModel = realmModel{
+            let newsModel = realmModel[indexPath.row]
+            
+            guard let viewController = self.getViewController(fromStoryboard: .detail, type: DetailViewController.self) else {return}
+            
+            viewController.realmNewsModel = newsModel
+            viewController.pageControl = false
+            self.navigationController?.show(viewController, sender: nil)
+        }else{
+            // alert action hata oluştu 
+        }
+ 
     }
     
     
