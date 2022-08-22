@@ -22,7 +22,6 @@ class HomeViewController : BaseViewController {
     
     private var newsViewModel = NewsViewModel ()
     private var newsArray = [Article]()
-    private var searchNewsArray = [Article]()
     private var page = 1
     private var requestStatus = false
     private var searchText : String = ""
@@ -46,7 +45,7 @@ class HomeViewController : BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
-
+        
     }
     
     
@@ -103,9 +102,6 @@ class HomeViewController : BaseViewController {
             // alert action  - aradığınız haber bulunamadı
         }
 
-       
-        
-        
         requestStatus = true
     }
 

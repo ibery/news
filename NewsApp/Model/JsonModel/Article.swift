@@ -15,7 +15,7 @@ struct Article: Codable {
     let url: String
     let urlToImage: String
     let publishedAt: String
-    let content: String
+    let content: String?
 
     enum CodingKeys: String, CodingKey {
         case source, author, title
@@ -32,7 +32,7 @@ struct Article: Codable {
          url = try values.decode(String.self , forKey: .url)
          urlToImage = try values.decode(String.self , forKey: .urlToImage)
          publishedAt = try values.decode(String.self , forKey: .publishedAt)
-         content = try values.decode(String.self , forKey: .content)
+         content = try values.decodeIfPresent(String.self , forKey: .content)
 
     }
     init?(){

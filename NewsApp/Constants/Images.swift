@@ -11,6 +11,7 @@ import UIKit
 enum Images: Int {
     case home
     case favorite
+    case notFound
     
     var imageName : String{
         switch self {
@@ -18,6 +19,8 @@ enum Images: Int {
             return "home"
         case.favorite:
             return "favorite"
+        case.notFound:
+            return "notfound"
         }
     }
     

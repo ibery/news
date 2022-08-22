@@ -36,7 +36,8 @@ class WebServices {
             case .success(let data):
           //      self.news.append(contentsOf: data.articles)
                 
-                self.news += data.articles
+                 self.news += data.articles
+        //        self.news = data.articles
                 for i in self.news{
                     print("websevice\(i.title)")
                 }

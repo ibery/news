@@ -38,33 +38,30 @@ class NewsViewModel {
         
        guard let url = URL(string: url ) else {return}
         
-        guard let url = URL(string: "https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=afdd6ffbe7af4785b519599df26fb67a\(Constants.pageUrl)\(Constants.pageCount)") else {return}
+      //  guard let url = URL(string: "https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=afdd6ffbe7af4785b519599df26fb67a\(Constants.pageUrl)\(Constants.pageCount)") else {return}
         
         print("url : \(url)")
         
         WebServices().downloadNewsData(url: url) { newsList in
                 if let newsList = newsList {
                     self.dataArray.append(contentsOf: newsList)
-       //             print("viewmodel")
-                    for i in newsList{
-         //               print(i.title)
-                    }
+   
                 }
                     self.delegate?.newsDataFetch(dataArray: self.dataArray)
             }
     }
     
-    func downloadNewsHome(){
-        guard let url = URL(string: Constants.baseUrl+Constants.country+Constants.apiKeyUrl+Constants.pageUrl+String(Constants.pageCount)+Constants.pageSize) else {return}
-        
-        WebServices().downloadNewsData(url: url){ newList in
-            if let newList = newList {
-                self.dataArray.append(contentsOf: newList)
-            }
-            
-        }
-    }
-    
+//    func downloadNewsHome(){
+//        guard let url = URL(string: Constants.baseUrl+Constants.country+Constants.apiKeyUrl+Constants.pageUrl+String(Constants.pageCount)+Constants.pageSize) else {return}
+//
+//        WebServices().downloadNewsData(url: url){ newList in
+//            if let newList = newList {
+//                self.dataArray.append(contentsOf: newList)
+//            }
+//
+//        }
+//    }
+//
 
     
 }
