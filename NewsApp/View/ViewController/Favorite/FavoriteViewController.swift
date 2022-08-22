@@ -17,7 +17,7 @@ class  FavoriteViewController : BaseViewController  {
     
     private var realmModel : Results<RealmNewsModel>?
     private var realmNewsViewModel = RealmNewsViewModel()
-    
+    let realm = try! Realm()
     
     // MARK: - Life cycle
     override func viewDidLoad() {
@@ -25,11 +25,17 @@ class  FavoriteViewController : BaseViewController  {
         tableView.dataSource = self
         tableView.delegate = self
         self.tableView.register(UINib(nibName: Constants.tableviewController.homeTableView, bundle: nil), forCellReuseIdentifier: Constants.cell.homeCell)
-        realmModel = realmNewsViewModel.getFavorite()
+        
+        print("viewd didload")
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationItem.title = "Favorite"
+        print("willapperar")
+        realmModel = realmNewsViewModel.getFavorite()
+        self.tableView.reloadData()
         self.navigationItem.title = "Favorite"
     }
     
@@ -86,11 +92,39 @@ extension FavoriteViewController : UITableViewDataSource , UITableViewDelegate{
             viewController.pageControl = false
             self.navigationController?.show(viewController, sender: nil)
         }else{
-            // alert action hata oluştu 
+            // alert action hata oluştu
         }
- 
+        
     }
     
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+
+           
+           let deleteTitle = "Delete"
+           let deleteAction = UIContextualAction(style: .destructive, title: deleteTitle) { (action, view, completion) in
+               
+               self.tableView.beginUpdates()
+               do{
+                   try! self.realm.write {
+                       self.realm.delete((self.realmModel![indexPath.row]))
+                   }
+               }catch{
+                   // alert action silme işlemmi başarılı olmadı
+               }
+               self.tableView.deleteRows(at: [indexPath], with: .automatic)
+               self.tableView.endUpdates()
+               completion(true)
+           }
+           deleteAction.image = UIImage(systemName: "trash.fill")
+           deleteAction.backgroundColor = .systemRed
+           
+           let configuration = UISwipeActionsConfiguration(actions: [ deleteAction])
+           return configuration
+       }
+
+
     
+  
+ 
 }
 

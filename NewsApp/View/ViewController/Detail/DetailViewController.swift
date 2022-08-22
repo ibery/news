@@ -26,18 +26,23 @@ class DetailViewController : BaseViewController  {
     var realmNewsModel = RealmNewsModel()
     private var realmNewsViewModel = RealmNewsViewModel()
     var pageControl = Bool ()
-    
+    let realm = try! Realm()
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupScreen()
         addRecognizer()
-
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = false
+        if pageControl{
+            favoriteImage.image = UIImage(systemName:  "heart")
+        }else{
+            favoriteImage.image = UIImage(systemName:  "heart.fill")
+        }
     }
     
     
@@ -100,7 +105,7 @@ class DetailViewController : BaseViewController  {
         }else{
             viewController.newsUrl = realmNewsModel.url
         }
-      
+        
         self.navigationController?.show(viewController, sender: nil)
     }
     
@@ -114,7 +119,7 @@ class DetailViewController : BaseViewController  {
         }
         let shareSheetVC = UIActivityViewController(
             activityItems :[
-            url
+                url
             ],
             applicationActivities: nil
         )
@@ -123,14 +128,12 @@ class DetailViewController : BaseViewController  {
         
     }
     @objc func favoriteClick(){
-        if pageControl{
+        if self.pageControl{
             favoriteImage.image = UIImage(systemName:  "heart.fill")
-        }else{
-            favoriteImage.image = UIImage(systemName: "heart")
-             // realm database den kaldır 
-        }
-        matchRealmToArticle()
-        realmNewsViewModel.addFavorite(realmNewsModel: realmNewsModel)
+            matchRealmToArticle()
+            realmNewsViewModel.addFavorite(realmNewsModel: realmNewsModel)
+            favoriteImage.isUserInteractionEnabled = false
+        }      
     }
     
     
@@ -147,8 +150,6 @@ class DetailViewController : BaseViewController  {
         
     }
     
-    private func sheareSheet(){
- 
-    }
+    
 }
 
