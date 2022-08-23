@@ -54,7 +54,7 @@ extension FavoriteViewController : UITableViewDataSource , UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.cell.homeCell) as? HomeTableViewCell else {fatalError()}
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.cell.homeCell) as? HomeTableViewCell else {return UITableViewCell()}
         
         if let realmModel = realmModel{
             cell.titleLabel.text = realmModel[indexPath.row].title

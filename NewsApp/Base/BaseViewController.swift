@@ -18,6 +18,7 @@ class BaseViewController : UIViewController  {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tabBarController?.viewDidLayoutSubviews()
+        self.navigationController?.navigationBar.tintColor = UIColor.black
     }
     
     override func viewWillAppear(_ animated: Bool) {

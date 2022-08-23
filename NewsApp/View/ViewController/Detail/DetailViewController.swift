@@ -20,6 +20,7 @@ class DetailViewController : BaseViewController  {
     @IBOutlet var authorLabel: UILabel!
     @IBOutlet var detailImage: UIImageView!
     @IBOutlet var contentLabel: UILabel!
+    @IBOutlet var sourceButton: UIButton!
     
     var newsModel = Article()
     var realmNewsModel = RealmNewsModel()
@@ -55,7 +56,8 @@ class DetailViewController : BaseViewController  {
         navigationItem.rightBarButtonItems = [favoriteButton, searchButton]
         favoriteButton.tintColor = .black
         searchButton.tintColor = .black
-        self.navigationController?.navigationBar.tintColor = .black
+        sourceButton.layer.borderWidth = 1
+        sourceButton.layer.borderColor = UIColor.lightGray.cgColor
     }
     
     // MARK: - Actions
