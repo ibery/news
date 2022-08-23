@@ -34,13 +34,9 @@ class WebServices {
             switch response.result{
             case .success(let data):
                 self.news += data.articles
-                for i in self.news{
-                    print("websevice\(i.title)")
-                }
                 completion(self.news)
             case.failure(let error):
                 UIWindow.showAlert(title: Constants.Error.title, message: Constants.Error.networkError)
-                print("web sevice hatası \(error)")
             }
             
         }

@@ -58,7 +58,7 @@ extension FavoriteViewController : UITableViewDataSource , UITableViewDelegate{
         
         if let realmModel = realmModel{
             cell.titleLabel.text = realmModel[indexPath.row].title
-            cell.descriptionLabel.text = realmModel[indexPath.row].description
+            cell.descriptionLabel.text = realmModel[indexPath.row].articleDescription
             let url = URL(string: realmModel[indexPath.row].urlToImage)
             
             if let data = try? Data(contentsOf: url!){
