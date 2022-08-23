@@ -26,20 +26,15 @@ class  FavoriteViewController : BaseViewController  {
         tableView.delegate = self
         self.tableView.register(UINib(nibName: Constants.tableviewController.homeTableView, bundle: nil), forCellReuseIdentifier: Constants.cell.homeCell)
         
-        print("viewd didload")
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationItem.title = "Favorite"
-        print("willapperar")
         realmModel = realmNewsViewModel.getFavorite()
         self.tableView.reloadData()
-        self.navigationItem.title = "Favorite"
+        self.navigationController?.navigationBar.isHidden = true
+       
     }
-    
-    
     
     // MARK: - Setup
     
@@ -67,9 +62,9 @@ extension FavoriteViewController : UITableViewDataSource , UITableViewDelegate{
             let url = URL(string: realmModel[indexPath.row].urlToImage)
             
             if let data = try? Data(contentsOf: url!){
-                cell.imageView?.image = UIImage(data: data)
+                cell.imageViewCell.image = UIImage(data: data)
             }else{
-                cell.imageView?.image = UIImage(named: Images.notFound.imageName)
+                cell.imageViewCell.image = UIImage(named: Images.notFound.imageName)
             }
         }
         return  cell
@@ -92,39 +87,33 @@ extension FavoriteViewController : UITableViewDataSource , UITableViewDelegate{
             viewController.pageControl = false
             self.navigationController?.show(viewController, sender: nil)
         }else{
-            // alert action hata oluştu
+            UIWindow.showAlert(title: Constants.Error.title, message: Constants.Error.overView)
         }
-        
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-
-           
-           let deleteTitle = "Delete"
-           let deleteAction = UIContextualAction(style: .destructive, title: deleteTitle) { (action, view, completion) in
-               
-               self.tableView.beginUpdates()
-               do{
-                   try! self.realm.write {
-                       self.realm.delete((self.realmModel![indexPath.row]))
-                   }
-               }catch{
-                   // alert action silme işlemmi başarılı olmadı
-               }
-               self.tableView.deleteRows(at: [indexPath], with: .automatic)
-               self.tableView.endUpdates()
-               completion(true)
-           }
-           deleteAction.image = UIImage(systemName: "trash.fill")
-           deleteAction.backgroundColor = .systemRed
-           
-           let configuration = UISwipeActionsConfiguration(actions: [ deleteAction])
-           return configuration
-       }
-
-
+        
+        let deleteTitle = "Delete"
+        let deleteAction = UIContextualAction(style: .destructive, title: deleteTitle) { (action, view, completion) in
+            
+            self.tableView.beginUpdates()
+            do{
+                try! self.realm.write {
+                    self.realm.delete((self.realmModel![indexPath.row]))
+                }
+            }catch{
+                UIWindow.showAlert(title: Constants.Error.title, message: Constants.Error.notSuccessful)
+            }
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+            self.tableView.endUpdates()
+            completion(true)
+        }
+        deleteAction.image = UIImage(systemName: "trash.fill")
+        deleteAction.backgroundColor = .systemRed
+        
+        let configuration = UISwipeActionsConfiguration(actions: [ deleteAction])
+        return configuration
+    }
     
-  
- 
 }
 

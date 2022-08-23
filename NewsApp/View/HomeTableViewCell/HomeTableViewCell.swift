@@ -2,13 +2,13 @@
 //  HomeTableViewCell.swift
 //  NewsApp
 //
-//  Created by Narkoz on 17.08.2022.
+//  Created by Narkoz on 23.08.2022.
 //
 
 import UIKit
 
 class HomeTableViewCell: UITableViewCell {
-    
+
     @IBOutlet var imageViewCell: UIImageView!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var descriptionLabel: UILabel!

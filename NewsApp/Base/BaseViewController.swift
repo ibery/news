@@ -17,14 +17,13 @@ class BaseViewController : UIViewController  {
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tabBarController?.viewDidLayoutSubviews()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
     }
-    
-    
     
     // MARK: - Setup
     

@@ -7,6 +7,7 @@
 
 import Foundation
 import RealmSwift
+import UIKit
 
 
 class RealmNewsViewModel {
@@ -14,7 +15,7 @@ class RealmNewsViewModel {
     // MARK: - Properties
     
     let realm = try! Realm()
-   private var realmModel : Results<RealmNewsModel>?
+    private var realmModel : Results<RealmNewsModel>?
     
     // MARK: - Initialierz
     
@@ -35,14 +36,14 @@ class RealmNewsViewModel {
                 realm.add(realmNewsModel)
             }
         }catch{
-            print("Error saving cow\(error.localizedDescription)")
-            // alert action eklenecek
+            print(error.localizedDescription)
+            UIWindow.showAlert(title: Constants.Error.title, message: Constants.Error.overView)
         }
     }
     
     func getFavorite() -> Results<RealmNewsModel>? {
         let realmNewsModel = realm.objects(RealmNewsModel.self)
-       return realmNewsModel
+        return realmNewsModel
     }
     
     

@@ -17,46 +17,54 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="8Pg-bS-rDB">
+                                <rect key="frame" x="0.0" y="130" width="414" height="766"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Appcent NewsApp" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uyw-LC-hby">
-                                <rect key="frame" x="102" y="44" width="211" height="31.5"/>
+                                <rect key="frame" x="101.5" y="44" width="211" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="zmJ-PO-qNy"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="8Pg-bS-rDB">
-                                <rect key="frame" x="0.0" y="138.5" width="414" height="758.5"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="R4M-tp-fIg">
+                                <rect key="frame" x="15" y="89" width="384" height="30"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="magnifyingglass" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="cBY-HO-Xit">
+                                        <rect key="frame" x="0.0" y="5.5" width="20.5" height="18.5"/>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </imageView>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Type a text" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WS9-Mu-nfG">
+                                        <rect key="frame" x="20.5" y="0.0" width="342" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <imageReference key="background" image="magnifyingglass" catalog="system" symbolScale="medium"/>
+                                    </textField>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="delete.left.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="18Y-Yo-q1t">
+                                        <rect key="frame" x="362.5" y="6" width="21.5" height="17.5"/>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </imageView>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="758.5" id="xNm-eV-bsn"/>
+                                    <constraint firstAttribute="height" constant="30" id="xNy-SI-fu5"/>
                                 </constraints>
-                            </tableView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="magnifyingglass" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="cBY-HO-Xit">
-                                <rect key="frame" x="20" y="82" width="48" height="34"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="48" id="eXn-UL-6DG"/>
-                                    <constraint firstAttribute="height" constant="35.5" id="v1R-Yw-J6K"/>
-                                </constraints>
-                            </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Type a text" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WS9-Mu-nfG">
-                                <rect key="frame" x="146.5" y="83" width="121" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <imageReference key="background" image="magnifyingglass" catalog="system" symbolScale="medium"/>
-                            </textField>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="8Pg-bS-rDB" secondAttribute="bottom" constant="-35" id="2Co-fw-jw3"/>
-                            <constraint firstItem="uyw-LC-hby" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="7lj-Wo-qFn"/>
-                            <constraint firstItem="WS9-Mu-nfG" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="AWx-W1-MoD"/>
-                            <constraint firstItem="cBY-HO-Xit" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="37.5" id="FOF-x8-q4v"/>
-                            <constraint firstItem="WS9-Mu-nfG" firstAttribute="top" secondItem="uyw-LC-hby" secondAttribute="bottom" constant="7.5" id="Hf5-Wc-4X2"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="8Pg-bS-rDB" secondAttribute="trailing" id="JxD-ry-COV"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="uyw-LC-hby" secondAttribute="trailing" constant="101" id="QyW-Yt-vkq"/>
-                            <constraint firstItem="8Pg-bS-rDB" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="ooj-bX-ejY"/>
-                            <constraint firstItem="uyw-LC-hby" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="102" id="wue-1o-kec"/>
-                            <constraint firstItem="cBY-HO-Xit" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="yu1-4j-5qV"/>
+                            <constraint firstItem="uyw-LC-hby" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="0w8-D3-EEi"/>
+                            <constraint firstItem="uyw-LC-hby" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="AoH-M0-5zS"/>
+                            <constraint firstItem="R4M-tp-fIg" firstAttribute="top" secondItem="uyw-LC-hby" secondAttribute="bottom" constant="15" id="Eb0-6j-g1a"/>
+                            <constraint firstItem="8Pg-bS-rDB" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="V2R-ZM-7uE"/>
+                            <constraint firstAttribute="bottom" secondItem="8Pg-bS-rDB" secondAttribute="bottom" id="ViH-p4-2hd"/>
+                            <constraint firstItem="R4M-tp-fIg" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" constant="15" id="fuh-JZ-3sX"/>
+                            <constraint firstItem="8Pg-bS-rDB" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="kzE-db-ZrD"/>
+                            <constraint firstItem="8Pg-bS-rDB" firstAttribute="top" secondItem="R4M-tp-fIg" secondAttribute="bottom" constant="11" id="ldU-Pv-KJU"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="R4M-tp-fIg" secondAttribute="trailing" constant="15" id="pb7-gs-Bo6"/>
                         </constraints>
                     </view>
                     <connections>
@@ -72,6 +80,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="delete.left.fill" catalog="system" width="128" height="104"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

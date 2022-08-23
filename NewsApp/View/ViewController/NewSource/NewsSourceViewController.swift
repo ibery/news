@@ -18,7 +18,6 @@ class NewsSourceViewController : BaseViewController  {
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         webViwUrl()
     }
     
@@ -27,11 +26,9 @@ class NewsSourceViewController : BaseViewController  {
         self.navigationItem.title = "News Source"
     }
     
-    
-    
     // MARK: - Setup
-    func webViwUrl() {
-
+    private func webViwUrl() {
+        
         guard let url = URL(string: newsUrl) else {return}
         let request = URLRequest(url : url)
         webView.loadRequest(request)

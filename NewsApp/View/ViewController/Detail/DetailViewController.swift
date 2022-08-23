@@ -12,8 +12,7 @@ class DetailViewController : BaseViewController  {
     
     
     // MARK: - Properties
-    @IBOutlet var shareImage: UIImageView!
-    @IBOutlet var favoriteImage: UIImageView!
+    
     @IBOutlet var authorImage: UIImageView!
     @IBOutlet var calendarImage: UIImageView!
     @IBOutlet var descriptionLabel: UILabel!
@@ -26,39 +25,95 @@ class DetailViewController : BaseViewController  {
     var realmNewsModel = RealmNewsModel()
     private var realmNewsViewModel = RealmNewsViewModel()
     var pageControl = Bool ()
-    let realm = try! Realm()
+    private let realm = try! Realm()
+    var favoriteButton = UIBarButtonItem()
+    var searchButton = UIBarButtonItem()
+    
     // MARK: - Life cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupScreen()
-        addRecognizer()
-        
+        updateProterties()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = false
         if pageControl{
-            favoriteImage.image = UIImage(systemName:  "heart")
+            favoriteButton.image = UIImage(systemName: "heart")
         }else{
-            favoriteImage.image = UIImage(systemName:  "heart.fill")
+            favoriteButton.image = UIImage(systemName: "heart.fill")
         }
     }
     
-    
-    
     // MARK: - Setup
-    func addRecognizer (){
-        shareImage.isUserInteractionEnabled = true
-        let shareRecognizer = UITapGestureRecognizer(target: self, action: #selector(shareClick))
-        shareImage.addGestureRecognizer(shareRecognizer)
-        
-        favoriteImage.isUserInteractionEnabled = true
-        let favoriteRecognizer = UITapGestureRecognizer(target: self, action: #selector(favoriteClick))
-        favoriteImage.addGestureRecognizer(favoriteRecognizer)
+    
+    func setupScreen(){
+        favoriteButton   = UIBarButtonItem(image: UIImage(systemName: "heart"),  style: .plain, target: self, action: #selector(favoriteTapped))
+        searchButton = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"),  style: .plain, target: self, action: #selector(shareTapped))
+        navigationItem.rightBarButtonItems = [favoriteButton, searchButton]
+        favoriteButton.tintColor = .black
+        searchButton.tintColor = .black
+        self.navigationController?.navigationBar.tintColor = .black
     }
     
-    func setupScreen (){
+    // MARK: - Actions
+    
+    @IBAction func NewsSourceButtonClick(_ sender: UIButton) {
+        
+        guard let viewController = self.getViewController(fromStoryboard: .source, type: NewsSourceViewController.self) else {return}
+        
+        if pageControl{
+            guard let url = newsModel?.url else {return}
+            viewController.newsUrl = url
+        }else{
+            viewController.newsUrl = realmNewsModel.url
+        }
+        
+        self.navigationController?.show(viewController, sender: nil)
+    }
+    
+    @objc func shareTapped (){
+        var url = String()
+        if pageControl{
+            url = self.newsModel?.url ?? ""
+        }else{
+            url = self.realmNewsModel.url
+        }
+        let shareSheetVC = UIActivityViewController(
+            activityItems :[
+                url
+            ],
+            applicationActivities: nil
+        )
+        present(shareSheetVC, animated: true)
+    }
+    
+    @objc func favoriteTapped(){
+        if self.pageControl{
+            favoriteButton.image = UIImage(systemName: "heart.fill")
+            matchRealmToArticle()
+            realmNewsViewModel.addFavorite(realmNewsModel: realmNewsModel)
+            favoriteButton.isEnabled = false
+            // buraya bir ayar lazım
+        }
+    }
+    
+    //MARK: - Methods
+    
+    private func matchRealmToArticle (){
+        if let title = newsModel?.title{realmNewsModel.title = title}
+        if let urlToImage = newsModel?.urlToImage{realmNewsModel.urlToImage = urlToImage}
+        if let author = newsModel?.author{realmNewsModel.author = author}
+        if let publishedAt = newsModel?.publishedAt{realmNewsModel.publishedAt = publishedAt}
+        if let articleDescription = newsModel?.articleDescription{realmNewsModel.articleDescription = articleDescription}
+        if let content = newsModel?.content{realmNewsModel.content = content}
+        if let url = newsModel?.url{realmNewsModel.url = url}
+        
+    }
+    
+    private func updateProterties (){
         if pageControl{
             descriptionLabel.text = newsModel?.articleDescription
             calendarLabel.text = newsModel?.publishedAt
@@ -78,7 +133,6 @@ class DetailViewController : BaseViewController  {
             calendarLabel.text = realmNewsModel.publishedAt
             authorLabel.text = realmNewsModel.author
             contentLabel.text = realmNewsModel.content
-            
             let url = URL(string:realmNewsModel.urlToImage)
             if let url = url {
                 if let data = try? Data(contentsOf: url){
@@ -87,69 +141,7 @@ class DetailViewController : BaseViewController  {
             }else{
                 detailImage.image = UIImage(named:Images.notFound.imageName)
             }
-            
         }
-        
     }
-    
-    
-    // MARK: - Actions
-    
-    @IBAction func NewsSourceButtonClick(_ sender: UIButton) {
-        
-        guard let viewController = self.getViewController(fromStoryboard: .source, type: NewsSourceViewController.self) else {return}
-        
-        if pageControl{
-            guard let url = newsModel?.url else {return}
-            viewController.newsUrl = url
-        }else{
-            viewController.newsUrl = realmNewsModel.url
-        }
-        
-        self.navigationController?.show(viewController, sender: nil)
-    }
-    
-    @objc func shareClick (){
-        print("share image click")
-        var url = String()
-        if pageControl{
-            url = self.newsModel?.url ?? ""
-        }else{
-            url = self.realmNewsModel.url
-        }
-        let shareSheetVC = UIActivityViewController(
-            activityItems :[
-                url
-            ],
-            applicationActivities: nil
-        )
-        present(shareSheetVC, animated: true)
-        
-        
-    }
-    @objc func favoriteClick(){
-        if self.pageControl{
-            favoriteImage.image = UIImage(systemName:  "heart.fill")
-            matchRealmToArticle()
-            realmNewsViewModel.addFavorite(realmNewsModel: realmNewsModel)
-            favoriteImage.isUserInteractionEnabled = false
-        }      
-    }
-    
-    
-    //MARK: - Methods
-    
-    func matchRealmToArticle (){
-        if let title = newsModel?.title{realmNewsModel.title = title}
-        if let urlToImage = newsModel?.urlToImage{realmNewsModel.urlToImage = urlToImage}
-        if let author = newsModel?.author{realmNewsModel.author = author}
-        if let publishedAt = newsModel?.publishedAt{realmNewsModel.publishedAt = publishedAt}
-        if let articleDescription = newsModel?.articleDescription{realmNewsModel.articleDescription = articleDescription}
-        if let content = newsModel?.content{realmNewsModel.content = content}
-        if let url = newsModel?.url{realmNewsModel.url = url}
-        
-    }
-    
-    
 }
 
